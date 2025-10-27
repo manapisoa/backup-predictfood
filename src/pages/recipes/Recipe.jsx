@@ -1,3 +1,5 @@
+import { AiOutlineSetting } from "react-icons/ai"; 
+import { BiFork } from "react-icons/bi"; 
 "use client"
 
 import { useState, useEffect } from "react"
@@ -443,8 +445,8 @@ const Recipe = () => {
       fetchInventoryProducts()
     } else {
       setError("No access token found. Please login.")
-      setRecipes(mockRecipes)
-      setStats(mockStats)
+      // setRecipes(mockRecipes)
+      // setStats(mockStats)
       setLoading(false)
     }
   }, [])
@@ -514,29 +516,90 @@ const Recipe = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background p-6 ">
+      <div className="max-w-7xl mx-auto space-y-6 ">
         {/* Header */}
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <ChefHat className="h-8 w-8 text-foreground" />
-            Gestion des Recettes
-          </h1>
-          <Button 
-            className="text-white bg-sky-500"
+        <div className="grid grid-cols-12 gap-4  mb-10">
+
+        <div className="  relative col-span-9 flex   bg-gradient-to-br from-orange-400 to-orange-500  space-x-6  items-center  rounded-2xl  min-w-3xl  pr-10 pt-4 pb-5">
+          <div className="mr-48">
+            <img src="/image/macaronie.png" alt="" className=" absolute -top-4  h-52 w-52 " />
+          </div>
+
+
+        <div className=" w-full p-0">
+          <div className="flex justify-between  w-full ">
+             <h1 className="text-4xl  font-bold flex items-center  text-white">
+            Cree votre recette 
+             </h1>
+           <Button 
+            className="text-orange-500 shadow-lg text-sm rounded-2xl bg-white "
             onClick={() => setShowCreateModal(true)}>
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className="h-4 w-4" />
             Nouvelle Recette
           </Button>
+          </div>
+         
+          <p className="text-orange-200 text-xs">
+            Lorem ipsum dolor, sit amet consectetur 
+          </p>
+           <p className="text-orange-200 text-xs">
+            Lorem ipsum dolor, sit amet consectetur adipisicing earum 
+           
+          </p>
+          <p>
+            <div className="space-x-1 mt-5">
+              <span className="bg-orange-400 rounded-sm text-orange-200 px-2 py-1 text-xs font-bold">
+                sousrecette 
+              </span>
+              <span className="bg-orange-400 rounded-sm text-orange-200 px-2 py-1 text-xs font-bold">
+                recette 
+              </span>
+              <span className="bg-orange-400 rounded-sm text-orange-200 px-2 py-1 text-xs font-bold">
+                ingredient 
+              </span>
+            </div>
+          </p>
+          </div>
+
+          
         </div>
 
-        {/* Error Alert */}
-        {error && (
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        )}
+        <div className="col-span-3 bg-slate-100 border rounded-2xl p-5 flex flex-col justify-between">
+          <div className=" text-md font-semibold flex justify-between items-center ">
+            <span className="flex items-center justify-between space-x-1">
+              <span className="text-gray-600">
+              <BiFork size={20}/> 
+
+              </span>
+              <span>
+              Votre recette
+
+              </span>
+
+            </span>
+              <span className="text-orange-600">
+            
+              <AiOutlineSetting size={20} />
+            </span>
+          </div>
+<div className="flex items-end justify-between">
+
+          <div>
+            <h1 className="font-bold text-4xl ">
+            12 <span className="text-sm text-gray-400">recette crée</span>
+
+            </h1>
+          </div>
+          <div className="flex items-center">
+            <img src="/image/macaronie.png" alt="" className="w-7 h-7"/>
+            <img src="/image/salade.png" alt="" className="w-7 h-7"/>
+          </div>
+</div>
+
+        </div>
+        </div>
+
 
         {/* Stats Summary */}
         {stats && (
@@ -577,7 +640,7 @@ const Recipe = () => {
         )}
 
         {/* AI Features */}
-        <Tabs defaultValue="kitchen" className="space-y-4 ">
+        <Tabs defaultValue="kitchen" className="space-y-4  ">
           <TabsList className="grid w-full grid-cols-5 ">
             <TabsTrigger> 
               <List className="w-4 h-4 mr-2 text-sky-500" />
@@ -1237,121 +1300,194 @@ const Recipe = () => {
             )}
           </TabsContent>
         </Tabs>
-
-        {/* Search */}
-        <div className="relative">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+<div className="space-y-10">
+   {/* Search */}
+        <div className=" relative ">
+          <Search className="absolute left-3 top-1 h-7 w-4 text-muted-foreground" />
           <Input
             type="text"
             placeholder="Rechercher par nom ou code..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-10 w-72"
           />
         </div>
 
         {/* Recipes Table */}
-        <Card>
-          <CardContent className="p-1">
+        <Card className="border-0   ">
+          <CardContent className="p-1 border-0">
             {loading ? (
               <div className="p-8 text-center text-muted-foreground">Chargement...</div>
             ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow className="text-foreground">
-                    <TableHead className="font-semibold"  >Nom</TableHead>
-                    <TableHead className="font-semibold"  >Code</TableHead>
-                    <TableHead className="font-semibold"  >Type</TableHead>
-                    <TableHead className="font-semibold"  >Coût</TableHead>
-                    <TableHead className="font-semibold"  >Marge</TableHead>
-                    <TableHead className="font-semibold"  >Actif</TableHead>
-                    <TableHead className="font-semibold"  >Validé</TableHead>
-                    <TableHead className="text-center">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredRecipes.map((recipe) => (
-                    <TableRow key={recipe.id}>
-                      <TableCell className="font-medium">{recipe.name}</TableCell>
-                      <TableCell>{recipe.code}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline">{recipe.recipe_type}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        €{typeof recipe.food_cost === "number" ? recipe.food_cost.toFixed(2) : "N/A"}
-                      </TableCell>
-                      <TableCell>{recipe.margin_percent}%</TableCell>
-                      <TableCell>
-                        <Badge 
-                        className={recipe.is_active ? "bg-green-500 text-white" : "text-white bg-red-500"}
-                        variant={recipe.is_active ? "default" : "secondary"}>
-                          {recipe.is_active ? "Oui" : "Non"}
-                        </Badge>
-                      </TableCell>
-                      <TableCell
-                        
-                      >
-                        <Badge 
-                        className={recipe.is_validated ? "bg-green-500 text-white" : "text-white bg-red-500"}>
-                          {recipe.is_validated ? "Oui" : "Non"}</Badge>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex justify-center gap-2">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => {
-                              setSelectedRecipe(recipe)
-                              setShowEditModal(true)
-                            }}
-                            title="Modifier"
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon" onClick={() => deleteRecipe(recipe.id)} title="Supprimer">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => toggleActive(recipe.id)}
-                            title="Activer/Désactiver"
-                          >
-                            <RotateCcw className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => calculateCost(recipe.id)}
-                            title="Calculer Coût"
-                          >
-                            <Calculator className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => improveRecipe(recipe.id, "cost")}
-                            title="Améliorer"
-                          >
-                            <Star className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => exportSheet(recipe.id)}
-                            title="Exporter Fiche"
-                          >
-                            <FileText className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <div className="grid grid-cols-4 gap-10">
+                
+             
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam amet dolor <span className="text-orange-500 underline ">voir</span></p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>   
+                <Card>
+                  <CardContent>
+                    <div className="flex flex-col justify-between">
+                      <div className="relative h-32">
+                      <img src="/image/salade.png" alt="" className="w-40 h-40 absolute -top-8 left-2" />
+                      </div>
+                      <div className="flex-col items-center justify-center">
+                      <p className="text-center  font-bold"><strong>Salade et tomate au citron</strong>.</p>
+                      <p className="text-center text-gray-500">Lorem ipsum dolor sit amet consectetuam nulla, possimus</p>
+                      </div>
+                      <div className="flex justify-between items-center mt-3">
+                          <span className="font-semibold text-xl ">
+                          <span className="text-orange-600 ">17</span>,1£ </span>
+                          <button className="bg-orange-600 text-white px-4 py-1 rounded-full text-sm ">Edit</button>
+
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+
+
+                
+
+                 
+
+              
+              </div>
             )}
           </CardContent>
         </Card>
+</div>
+       
 
         {/* Create Modal */}
         <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
