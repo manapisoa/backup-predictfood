@@ -224,7 +224,7 @@ const Sidebar = () => {
         {/* Logo */}
         <div className="px-6 py-4 text-2xl font-bold text-sidebar-primary flex items-center justify-between">
           {!isCollapsed ? (
-            <div>Predict Food</div>
+            <div> Food <span className="text-orange-500">Predict</span></div>
           ) : (
             <div className="w-full text-center text-sky-500">
               P<span className="text-foreground">f</span>
