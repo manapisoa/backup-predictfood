@@ -179,7 +179,7 @@ const Sidebar = () => {
         } h-screen bg-sidebar border-r border-sidebar-border shadow-md flex flex-col transition-all duration-300 ease-in-out z-50`}
       >
         {/* Bouton de réduction (version desktop) */}
-        {/* <button 
+        <button 
           onClick={() => setIsCollapsed(!isCollapsed)}
           className={`absolute ${
             isCollapsed ? 'left-20' : 'left-60'
@@ -219,7 +219,7 @@ const Sidebar = () => {
               <polyline points="15 18 9 12 15 6" />
             </svg>
           )}
-        </button> */}
+        </button>
         
         {/* Logo */}
         <div className="px-6 py-4 text-2xl font-bold text-sidebar-primary flex items-center justify-between">
