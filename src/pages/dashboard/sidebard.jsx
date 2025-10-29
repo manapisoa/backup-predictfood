@@ -245,7 +245,7 @@ const Sidebar = () => {
                       to={item.to}
                       className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                         location.pathname === item.to
-                          ? 'bg-sky-500  text-accent-foreground hover:bg-sky-500 font-medium'
+                          ? 'bg-orange-500  text-accent-foreground text-white hover:bg-orange-500 font-medium'
                           : 'text-sidebar-foreground/80 hover:bg-sidebar-foreground/10'
                       }`}
                       onClick={() => isMobile && setShowMobileMenu(false)}
